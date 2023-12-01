@@ -3,6 +3,8 @@ package Java.learnspringboot.courses.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Java.learnspringboot.courses.bean.Course;
@@ -30,12 +32,19 @@ public class CourseController {
      }
 
      @GetMapping("/courses/{id}")
-     public Optional<Course> getCourseDetails(@PathVariable long id) {
+     public Course getCourseDetails(@PathVariable long id) {
+
           Optional<Course> course = repository.findById(id);
-          if(course.isEmpty()) {
+
+          if (course.isEmpty()) {
                throw new RuntimeException("No course with id: " + id);
           }
           return course.get();
+     }
+
+     @PostMapping("/courses")
+     public void createCourse(@RequestBody Course course) {
+          repository.save(course);
      }
 
 };
