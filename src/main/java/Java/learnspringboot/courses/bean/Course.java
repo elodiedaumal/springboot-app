@@ -1,17 +1,32 @@
-package Java.learnspringboot.courses.controller.bean;
+package Java.learnspringboot.courses.bean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Course {
-     private int id;
+
+     @Id
+     @GeneratedValue
+     private long id;
+
+     @Column
      private String name;
      private String author;
 
-     public Course(int id, String name, String author) {
+     public Course() {
+
+     }
+
+     public Course(long id, String name, String author) {
           this.id = id;
           this.name = name;
           this.author = author;
      }
 
-     public int getId() {
+     public long getId() {
           return id;
      }
 
